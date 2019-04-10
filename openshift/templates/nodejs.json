@@ -10,9 +10,9 @@
       "iconClass": "icon-nodejs",
       "openshift.io/provider-display-name": "Red Hat, Inc.",
       "template.openshift.io/bindable": "false"
-    }
-  "message": "",
+          }
   },
+  "message": "",
   "labels": {
       "template": "nodejs-assist",
       "app": "nodejs-assist"
