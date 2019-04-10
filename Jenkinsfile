@@ -1,79 +1,8 @@
-//Jenkinsfile (Declarative Pipeline)
-skip = false
-STAGENAME = "dev"
-
-stage('prepare build environment') {
-    //check ENV
-    node() {
-        if ("${NEXUS_HOST}" == '') {
-            errors "No Nexus Repository defined! check environment variable 'NEXUS_HOST'"
-        }
-        printf("-------------- Using NEXUS_HOST=${NEXUS_HOST}")
-    }
-}
-
-stage('build maven artifacts') {
-    //artifact builds
-    node('maven') {
-        try {
-            printf("-------------- Using NEXUS_HOST=${NEXUS_HOST}")
-            selectStage(STAGENAME)
-            checkout scm
-            if (!skip) {
-                sh "openshift/bakery-app/maven-build.sh ${NEXUS_HOST}"
-            } else {
-                printf("Skipped maven build!!!")
-            }
-        }
-        finally {
-            //no unit test implemented yet
-            //printf("Validate Unit-Test")
-            //junit 'bakery-app/**/*report/*.xml'
-        }
-    }
-}
-
-stage('build docker images') {
-    timeout(time: 2, unit: 'DAYS') {
-        input message: '==> build images?'
-    }
-    node() {
-        checkout scm
-        selectStage(STAGENAME)
-        parallel web: {
-            ocBakeryBuild('bakery-web-server')
-        }, report: {
-            ocBakeryBuild('bakery-report-server')
-        }, worker: {
-            ocBakeryBuild('bakery-workers')
-        }
-    }
-}
-
-stage('Trigger QA') {
-    timeout(time: 2, unit: 'DAYS') {
-        input message: '==> trigger QA?'
-    }
-    node('') {
-        ocstage(STAGENAME, "qa")
-        //trigger next build pipeline
-        sh "openshift/create-build-pipeline.sh qa"
-    }
-}
-
-
-private void ocBakeryBuild(String component) {
-    stage("build ${component} image") {
-        sh "openshift/bakery-app/create_${component}.sh build"
-    }
-}
-
-private void selectStage(String stagename) {
-    sh "oc project ta-pipeline-${stagename}"
-}
-
-private void ocstage(String src, String dest) {
-    sh "openshift/bakery-app/stage-images.sh ${src} ${dest} bakery-report-server:latest"
-    sh "openshift/bakery-app/stage-images.sh ${src} ${dest} bakery-web-server:latest"
-    sh "openshift/bakery-app/stage-images.sh ${src} ${dest} bakery-worker:latest"
+node ('') {
+  stage ('buildInDevelopment') {
+    openshiftBuild(namespace: 'devops', buildConfig: 'nodejs-persistent', showBuildLogs: 'true')
+  }
+  stage ('deployInDevelopment') {
+    openshiftDeploy(namespace: 'devops', deploymentConfig: 'nodejs-persistent')
+  }
 }
