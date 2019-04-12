@@ -16,9 +16,6 @@ import ProfessionalCard from '@/models/ProfessionalCard';
 import FileType from '@/models/FileType';
 import PlaceType from '@/models/PlaceType';
 import Place from '@/models/Place';
-import Process from '@/models/Process';
-import PopulationStatus from '@/models/PopulationStatus';
-import ActType from '@/models/ActType';
 
 const departaments: Departament[] = [{
     id: "DE1",
@@ -113,7 +110,7 @@ const roles: Role[] = [{
     office: offices[1]
 }]
 
-const studyLevels: Descriptor[] = [{
+const studyLevels : Descriptor[] = [{
     id: "SL1",
     name: "Profesional"
 }, {
@@ -170,7 +167,7 @@ const users: User[] = [
         lastName: "Kernel",
         secondLastName: "Fernandez",
         gender: genders[1],
-        identityStatus: IdentityStatus.OK,
+        identityStatus: IdentityStatus.BLOCK,
         birthDate: d,
         ubications: [{
             city: cities[1],
@@ -505,7 +502,7 @@ const processTypes: ProcessType[] = [{
     name: "Tipo de proceso 3"
 }]
 
-const processClases: ProcessClass[] = [{
+const processClass: ProcessClass[] = [{
     id: "PC1",
     name: "Clase de proceso 1"
 },
@@ -527,8 +524,7 @@ const subjectTypes: SubjectType[] = [{
     canBeDefended: false,
     verifyProfessionalCard: true,
     company: false,
-    emplace: false,
-    studyLevel: false
+    emplace: false
 },
 {
     id: "UT2",
@@ -539,8 +535,7 @@ const subjectTypes: SubjectType[] = [{
     canBeDefended: true,
     verifyProfessionalCard: false,
     company: true,
-    emplace: false,
-    studyLevel: false
+    emplace: false
 },
 {
     id: "UT3",
@@ -551,8 +546,7 @@ const subjectTypes: SubjectType[] = [{
     canBeDefended: true,
     verifyProfessionalCard: false,
     company: false,
-    emplace: true,
-    studyLevel: true
+    emplace: true
 }, {
     id: "UT4",
     name: "demandante",
@@ -562,8 +556,7 @@ const subjectTypes: SubjectType[] = [{
     canBeDefended: true,
     verifyProfessionalCard: false,
     company: false,
-    emplace: false,
-    studyLevel: true
+    emplace: false
 }]
 
 const usersAndCompanies: Subject[] = users;
@@ -646,130 +639,6 @@ const microZones: string[] = [
     "Zona 1", "Zona 2", "Zona 3"
 ]
 
-const hardcored: string[] = [
-    '[{"firstName":"Mateo","secondName":"","lastName":"Ojeda","secondLastName":"Mieles","ubications":[],"selected":false,"gender":{"id":"M","name":"Masculino"},"documentType":{"id":"CE","name":"Cedula de extranjeria"},"phones":["","",""],"emails":[{"email":"","notify":false},{"email":"","notify":false},{"email":"","notify":false}],"professionalCard":{"id":"123","status":"ok"},"type":{"id":"UT1","name":"abogado","defense":true,"identified":true,"autoDefense":false,"canBeDefended":false,"verifyProfessionalCard":true,"company":false,"emplace":false,"studyLevel":false},"birthDate":"2019-03-27","document":"123","identityStatus":"ok","studyLevel":{"id":"SL1","name":"Profesional"},"tempId":"123"},{"firstName":"Pedro","secondName":"Ternero","lastName":"Kernel","secondLastName":"Fernandez","ubications":[],"selected":false,"gender":{"id":"M","name":"Masculino"},"documentType":{"id":"CC","name":"Cedula de ciudadania"},"phones":["","",""],"emails":[{"email":"","notify":false},{"email":"","notify":false},{"email":"","notify":false}],"professionalCard":{},"type":{"id":"UT4","name":"demandante","defense":false,"identified":true,"autoDefense":true,"canBeDefended":true,"verifyProfessionalCard":false,"company":false,"emplace":false,"studyLevel":true},"birthDate":"2019-03-27","document":"1234","identityStatus":"ok","studyLevel":{"id":"SL2","name":"Bachiller"},"tempId":"1234"}]'
-]
-
-const processList: Process[] = [
-    {
-        id: "1232144521",
-        "subjectList": [
-            { "firstName": "Mateo", "secondName": "", "lastName": "Ojeda", "secondLastName": "Mieles", "ubications": [], "selected": false, "gender": { "id": "M", "name": "Masculino" }, "documentType": { "id": "CE", "name": "Cedula de extranjeria" }, "phones": ["", "", ""], "emails": [{ "email": "", "notify": false }, { "email": "", "notify": false }, { "email": "", "notify": false }], "professionalCard": { "id": "123", "status": IdentityStatus.OK }, "type": { "id": "UT1", "name": "abogado", "defense": true, "identified": true, "autoDefense": false, "canBeDefended": false, "verifyProfessionalCard": true, "company": false, "emplace": false, "studyLevel": false }, "birthDate": "2019-03-29", "document": "123", "identityStatus": IdentityStatus.OK, "studyLevel": { "id": "SL1", "name": "Profesional" }, "tempId": "123", "asociate": "1234" },
-            { "firstName": "Pedro", "secondName": "Ternero", "lastName": "Kernel", "secondLastName": "Fernandez", "ubications": [], "selected": false, "gender": { "id": "M", "name": "Masculino" }, "documentType": { "id": "CC", "name": "Cedula de ciudadania" }, "phones": ["", "", ""], "emails": [{ "email": "", "notify": false }, { "email": "", "notify": false }, { "email": "", "notify": false }], "professionalCard": {}, "type": { "id": "UT4", "name": "demandante", "defense": false, "identified": true, "autoDefense": true, "canBeDefended": true, "verifyProfessionalCard": false, "company": false, "emplace": false, "studyLevel": true }, "birthDate": "2019-03-29", "document": "1234", "identityStatus": IdentityStatus.OK, "studyLevel": { "id": "SL2", "name": "Bachiller" }, "tempId": "1234" }
-        ],
-        "fileList": [],
-        "placeList": [
-            { "ubication": { "city": { "id": "CY1", "name": "Bogota", "departament": { "id": "DE1", "name": "Cundinamarca" } }, "address": { "part1": "calle", "part2": "123", "part3": "A", "part4": "123", "part5": "A", "part6": "", "part7": "Norte" } }, "id": "123123", "register": "12345", "type": { "id": "PT1", "name": "Rural" }, "population": PopulationStatus.REGULAR, "area": "123", "measure": "metros", "zone": "Zona 1", "name": "123", "inspection": "123213", "vereda": "123123", "corregimiento": "123123", "description": "123123123" }
-        ],
-        corporation: corporations[0],
-        subEspeciality: {
-            ...especialities[0],
-            especiality: especialities[1]
-        },
-        lawType: lawTypes[0],
-        processType: processTypes[0],
-        subProcessClass: {
-            ...processClases[0],
-            processClass: processClases[0]
-        },
-        office: offices[0],
-        judge: users[1],
-        creationDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-        status: "ACTIVE",
-        factsList: [],
-        actList: []
-    },
-    {
-        id: "213541233",
-        "subjectList": [
-            { "firstName": "Mateo", "secondName": "", "lastName": "Ojeda", "secondLastName": "Mieles", "ubications": [], "selected": false, "gender": { "id": "M", "name": "Masculino" }, "documentType": { "id": "CE", "name": "Cedula de extranjeria" }, "phones": ["", "", ""], "emails": [{ "email": "", "notify": false }, { "email": "", "notify": false }, { "email": "", "notify": false }], "professionalCard": { "id": "123", "status": IdentityStatus.OK }, "type": { "id": "UT1", "name": "abogado", "defense": true, "identified": true, "autoDefense": false, "canBeDefended": false, "verifyProfessionalCard": true, "company": false, "emplace": false, "studyLevel": false }, "birthDate": "2019-03-29", "document": "123", "identityStatus": IdentityStatus.OK, "studyLevel": { "id": "SL1", "name": "Profesional" }, "tempId": "123", "asociate": "1234" },
-            { "firstName": "Pedro", "secondName": "Ternero", "lastName": "Kernel", "secondLastName": "Fernandez", "ubications": [], "selected": false, "gender": { "id": "M", "name": "Masculino" }, "documentType": { "id": "CC", "name": "Cedula de ciudadania" }, "phones": ["", "", ""], "emails": [{ "email": "", "notify": false }, { "email": "", "notify": false }, { "email": "", "notify": false }], "professionalCard": {}, "type": { "id": "UT4", "name": "demandante", "defense": false, "identified": true, "autoDefense": true, "canBeDefended": true, "verifyProfessionalCard": false, "company": false, "emplace": false, "studyLevel": true }, "birthDate": "2019-03-29", "document": "1234", "identityStatus": IdentityStatus.OK, "studyLevel": { "id": "SL2", "name": "Bachiller" }, "tempId": "1234" }
-        ],
-        "fileList": [],
-        "placeList": [
-            { "ubication": { "city": { "id": "CY1", "name": "Bogota", "departament": { "id": "DE1", "name": "Cundinamarca" } }, "address": { "part1": "calle", "part2": "123", "part3": "A", "part4": "123", "part5": "A", "part6": "", "part7": "Norte" } }, "id": "123123", "register": "12345", "type": { "id": "PT1", "name": "Rural" }, "population": PopulationStatus.REGULAR, "area": "123", "measure": "metros", "zone": "Zona 1", "name": "123", "inspection": "123213", "vereda": "123123", "corregimiento": "123123", "description": "123123123" }
-        ],
-        corporation: corporations[1],
-        subEspeciality: {
-            ...especialities[0],
-            especiality: especialities[0]
-        },
-        processType: processTypes[1],
-        subProcessClass: {
-            ...processClases[1],
-            processClass: processClases[1]
-        },
-        office: offices[1],
-        judge: users[2],
-        creationDate: new Date(),
-        status: "BLOCK",
-        factsList: [],
-        actList: []
-    }
-]
-
-const cicles: Descriptor[] = [
-    {
-        id: "C1",
-        name: "Ciclo 1"
-    },
-    {
-        id: "C2",
-        name: "Ciclo 2"
-    }
-]
-const providences: Descriptor[] = [
-    {
-        id: "PR1",
-        name: "Providencia 1"
-    },
-    {
-        id: "PR2",
-        name: "Providencia 2"
-    }
-]
-const precisions: Descriptor[] = [
-    {
-        id: "PC1",
-        name: "Precision 1"
-    },
-    {
-        id: "PC2",
-        name: "Precision 2"
-    }
-]
-
-const actTypes: ActType[] = [
-    {
-        providence: true,
-        daysToEnd: 0,
-        id: "AT1",
-        name: "providence - 0",
-        procedure: "Tramite 1"
-    },
-    {
-        providence: false,
-        daysToEnd: 0,
-        id: "AT2",
-        name: "dias - 0",
-        procedure: "Tramite 2"
-    },
-    {
-        providence: true,
-        daysToEnd: 5,
-        id: "AT3",
-        name: "providence - 5",
-        procedure: "Tramite 3"
-    },
-    {
-        providence: false,
-        daysToEnd: 5,
-        id: "AT4",
-        name: "dias - 5",
-        procedure: "Tramite 4"
-    }
-]
-
 const Data = {
     roles: roles,
     offices: offices,
@@ -787,7 +656,7 @@ const Data = {
     part7Items: part7Items,
     lawTypes: lawTypes,
     processTypes: processTypes,
-    processClases: processClases,
+    processClass: processClass,
     subjectTypes: subjectTypes,
     usersAndCompanies: usersAndCompanies,
     professionalCards: professionalCards,
@@ -796,12 +665,7 @@ const Data = {
     places: places,
     measures: measures,
     microZones: microZones,
-    studyLevels: studyLevels,
-    hardcored: hardcored,
-    processList: processList,
-    cicles: cicles,
-    actTypes: actTypes,
-    providences: providences,
-    precisions: precisions,
+    studyLevels:studyLevels
+
 }
 export default Data 

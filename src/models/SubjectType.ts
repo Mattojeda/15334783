@@ -8,7 +8,6 @@ export default class SubjectType extends Descriptor {
     defense: boolean
     canBeDefended: boolean
     emplace: boolean
-    studyLevel: boolean
 
     constructor() {
         super()
@@ -19,6 +18,5 @@ export default class SubjectType extends Descriptor {
         this.verifyProfessionalCard = false
         this.company = false
         this.emplace = false
-        this.studyLevel = false
     }
 }

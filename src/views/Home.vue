@@ -78,6 +78,12 @@
                 <v-btn flat icon color="primary" v-if="props.item.status != 'DISABLED'">
                   <v-icon>lock</v-icon>
                 </v-btn>
+                <v-btn flat icon color="info" v-if="props.item.status != 'ACTIVE'">
+                  <v-icon>lock_open</v-icon>
+                </v-btn>
+                <v-btn flat icon color="warning" v-if="props.item.status != 'BLOCK'">
+                  <v-icon>block</v-icon>
+                </v-btn>
               </td>
             </template>
           </v-data-table>

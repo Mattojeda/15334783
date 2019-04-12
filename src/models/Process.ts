@@ -7,10 +7,6 @@ import ProcessType from './ProcessType';
 import Person from './Person';
 import AppFile from './AppFile';
 import Place from './Place';
-import Office from './Office';
-import Subject from './Subject';
-import Fact from './Fact';
-import Act from './Act';
 
 
 export default class Process extends Descriptor {
@@ -19,15 +15,9 @@ export default class Process extends Descriptor {
     lawType?: LawType
     processType?: ProcessType
     subProcessClass?: SubProcessClass
-    subjectList: Subject[] = []
+    personList: Person[] = []
     fileList: AppFile[] = []
     placeList: Place[] = []
-    office?: Office
-    judge?: Person
-    creationDate?: Date
-    status?: string
-    factsList: Fact[] = []
-    actList: Act[] = []
 
     constructor() {
         super()

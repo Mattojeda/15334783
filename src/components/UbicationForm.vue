@@ -10,7 +10,7 @@
         </v-card-title>
         <v-form v-model="ubicationForm" @submit.prevent="save" ref="form">
           <v-card-text>
-            <v-container grid-list-md>
+            <v-container>
               <v-layout wrap>
                 <v-flex xs12 md4>
                   <v-select
@@ -55,8 +55,7 @@
                 <v-flex xs4 md1>
                   <v-text-field
                     v-model="ubication.address.part2"
-                    :rules="[rules.number, rules.required]"
-                    type="number"
+                    :rules="[rules.required]"
                     :label="Messages.addressNo"
                   ></v-text-field>
                 </v-flex>
@@ -71,8 +70,7 @@
                 <v-flex xs6 md1>
                   <v-text-field
                     v-model="ubication.address.part4"
-                    :rules="[rules.number, rules.required]"
-                    type="number"
+                    :rules="[rules.required]"
                     :label="Messages.addressNo"
                   ></v-text-field>
                 </v-flex>
@@ -85,11 +83,7 @@
                   ></v-autocomplete>
                 </v-flex>
                 <v-flex xs6 md1>
-                  <v-text-field
-                    v-model="ubication.address.part6"
-                    :rules="[rules.number, rules.required]"
-                    type="number"
-                  ></v-text-field>
+                  <v-text-field v-model="ubication.address.part6" :rules="[rules.required]"></v-text-field>
                 </v-flex>
                 <v-flex xs6 md2>
                   <v-autocomplete

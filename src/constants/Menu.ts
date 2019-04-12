@@ -32,16 +32,6 @@ export const MenuItems: Menu[] = [
         icon: "work",
         name: "Procesos",
         path: "/procesos",
-        childs: [{
-            icon: "add",
-            name: "Crear",
-            path: "/procesos/agregar",
-            childs: []
-        }, {
-            icon: "search",
-            name: "Consultar",
-            path: "/procesos",
-            childs: []
-        }]
+        childs: []
     }
 ]

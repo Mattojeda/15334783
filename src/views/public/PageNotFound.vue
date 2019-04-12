@@ -1,5 +1,5 @@
 <template>
-  <v-container  grid-list-md>
+  <v-container fluid>
     <v-layout align-center justify-center row fill-height>
       <v-flex class="text-xs-center">
         <div class="display-4 primary--text">

@@ -1,23 +1,23 @@
 <template>
   <v-card flat>
-    <v-form v-model="placeForm" @submit.prevent="savePlace()" ref="form">
+    <v-form v-model="placeForm" @submit.prevent="search()" ref="form">
       <v-card-text>
-        <v-container grid-list-md>
+        <v-container>
           <v-layout wrap>
             <v-flex xs12 md6>
               <v-text-field
                 v-model="place.register"
                 :label="Messages.placeRegister"
-                :rules="[rules.number, rules.required]"
-                type="number"
+                :rules="[rules.required]"
+                disabled
               ></v-text-field>
             </v-flex>
             <v-flex xs12 md6>
               <v-text-field
                 v-model="place.id"
                 :label="Messages.placeDocument"
-                :rules="[rules.number, rules.required]"
-                type="number"
+                :rules="[rules.required]"
+                disabled
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -64,8 +64,7 @@
             <v-flex xs4 md1>
               <v-text-field
                 v-model="place.ubication.address.part2"
-                type="number"
-                :rules="place.type == data.placeTypes[1] ? [rules.number, rules.required] : []"
+                :rules="place.type == data.placeTypes[1] ? [rules.required] : []"
                 :label="Messages.addressNo"
               ></v-text-field>
             </v-flex>
@@ -80,8 +79,7 @@
             <v-flex xs6 md1>
               <v-text-field
                 v-model="place.ubication.address.part4"
-                type="number"
-                :rules="place.type == data.placeTypes[1] ? [rules.number,rules.required] : []"
+                :rules="place.type == data.placeTypes[1] ? [rules.required] : []"
                 :label="Messages.addressNo"
               ></v-text-field>
             </v-flex>
@@ -96,8 +94,7 @@
             <v-flex xs6 md1>
               <v-text-field
                 v-model="place.ubication.address.part6"
-                type="number"
-                :rules="place.type == data.placeTypes[1] ? [rules.number, rules.required] : []"
+                :rules="place.type == data.placeTypes[1] ? [rules.required] : []"
               ></v-text-field>
             </v-flex>
             <v-flex xs6 md2>
@@ -118,12 +115,7 @@
               ></v-select>
             </v-flex>
             <v-flex xs12 md6>
-              <v-text-field
-                v-model="place.area"
-                :rules="[rules.number, rules.required]"
-                type="number"
-                :label="Messages.area"
-              ></v-text-field>
+              <v-text-field v-model="place.area" :rules="[rules.required]" :label="Messages.area"></v-text-field>
             </v-flex>
             <v-flex xs12 md6>
               <v-select
@@ -150,7 +142,7 @@
               ></v-text-field>
             </v-flex>
             <v-flex xs12 md6 v-if="place.type == data.placeTypes[0]">
-              <v-text-field v-model="place.name" :rules="[rules.required]" :label="Messages.name"></v-text-field>
+              <v-text-field v-model="place.nombre" :rules="[rules.required]" :label="Messages.name"></v-text-field>
             </v-flex>
             <v-flex xs12 md6 v-if="place.type == data.placeTypes[0]">
               <v-text-field
@@ -188,7 +180,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
-        <v-btn color="primary" type="submit">
+        <v-btn color="primary" @click="savePlace" type="submit">
           {{Messages.save}}
           <v-icon right>save</v-icon>
         </v-btn>

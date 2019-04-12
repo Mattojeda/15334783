@@ -25,7 +25,6 @@ export default class Subject extends Person {
         ]
     emplaced?: boolean
     private?: boolean
-    tempId?: string | number
 
     constructor() {
         super()

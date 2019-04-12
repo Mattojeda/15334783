@@ -4,13 +4,10 @@ import SessionManage from './providers/SessionManage';
 import Login from '@/views/public/Login.vue';
 import Home from '@/views/Home.vue';
 import UserCreate from '@/views/user/UserCreate.vue';
-import UserList from '@/views/user/UserList.vue';
+import Users from '@/views/user/Users.vue';
 import UserDetail from '@/views/user/UserDetail.vue';
 import UserHome from '@/views/user/UserHome.vue';
-import ProcessHome from '@/views/process/ProcessHome.vue';
 import ProcessCreate from '@/views/process/ProcessCreate.vue';
-import ProcessDetail from '@/views/process/ProcessDetail.vue';
-import ProcessList from '@/views/process/ProcessList.vue';
 import ResetPassword from '@/views/public/ResetPassword.vue';
 
 Vue.use(Router);
@@ -29,7 +26,7 @@ const routes = [
       {
         name: "users",
         path: '',
-        component: UserList
+        component: Users
       }, {
         name: "addUser",
         path: 'agregar',
@@ -43,24 +40,9 @@ const routes = [
     ]
   },
   {
+    name: "process",
     path: "/procesos",
-    component: ProcessHome,
-    children: [
-      {
-        name: "process",
-        path: '',
-        component: ProcessList
-      }, {
-        name: "addProcess",
-        path: 'agregar',
-        component: ProcessCreate
-      },
-      {
-        name: "detailProcess",
-        path: ':idProcess',
-        component: ProcessDetail
-      }
-    ]
+    component: ProcessCreate
   },
   {
     name: "home",

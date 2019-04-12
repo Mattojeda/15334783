@@ -73,7 +73,7 @@
         <SubjectHome
           @showMessage="showMessage"
           v-if=" activeTab == '1'"
-          :subjectList="process.subjectList"
+          :personList="process.personList"
         />
       </v-tab-item>
       <v-tab-item value="2">
@@ -105,7 +105,6 @@ import SubjectHome from "@/views/subject/SubjectHome.vue";
 import SessionManage from "@/providers/SessionManage";
 import FilesManage from "@/components/FilesManage.vue";
 import PlacesManage from '@/components/PlacesManage.vue';
-import Config from '../../constants/Config';
 
 @Component({
   components: {
@@ -257,7 +256,7 @@ export default class ProcessCreate extends BaseController {
       }
     }
     let data: any[] = [];
-    if (this.selectSteps[0].value && this.selectSteps[0].value.id == Config.penalId) {
+    if (this.selectSteps[0].value && this.selectSteps[0].value.id == "ES2") {
       this.selectSteps[3].show = true;
     } else {
       this.selectSteps[3].show = false;
@@ -279,10 +278,10 @@ export default class ProcessCreate extends BaseController {
         data = Data.processTypes;
         break;
       case Messages.processClass:
-        data = Data.processClases;
+        data = Data.processClass;
         break;
       case Messages.SubProcessClass:
-        data = Data.processClases;
+        data = Data.processClass;
         break;
     }
     if (data.length == 1) {

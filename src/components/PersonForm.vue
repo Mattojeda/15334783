@@ -2,7 +2,7 @@
   <v-card flat>
     <v-form v-model="personForm" @submit.prevent="savePersonalInformation" ref="form">
       <v-card-text>
-        <v-container grid-list-md>
+        <v-container>
           <v-layout wrap>
             <v-flex xs12 v-if="!!user.identityStatus" class="text-xs-center">
               <v-chip
@@ -26,8 +26,7 @@
               <v-text-field
                 v-model="user.document"
                 :label="Messages.document"
-                :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
-                type="number"
+                :rules="mode != Crud.READ ? [rules.required] : []"
                 :disabled="mode == Crud.CREATE || mode == Crud.UPDATE"
               ></v-text-field>
             </v-flex>
