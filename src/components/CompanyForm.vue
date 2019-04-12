@@ -2,7 +2,7 @@
   <v-card flat>
     <v-form v-model="companyForm" @submit.prevent="saveForm" ref="form">
       <v-card-text>
-        <v-container>
+        <v-container  grid-list-md>
           <v-layout wrap>
             <v-flex xs12 md6>
               <v-text-field

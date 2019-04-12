@@ -84,18 +84,36 @@
           >{{Messages.disabled}}</v-chip>
         </td>
         <td>
-          <v-btn flat icon color="accent" @click="selectUser(props.item)">
-            <v-icon>search</v-icon>
-          </v-btn>
-          <v-btn flat icon color="primary" v-if="props.item.status != 'DISABLED'">
-            <v-icon>lock</v-icon>
-          </v-btn>
-          <v-btn flat icon color="info" v-if="props.item.status != 'ACTIVE'">
-            <v-icon>lock_open</v-icon>
-          </v-btn>
-          <v-btn flat icon color="warning" v-if="props.item.status != 'BLOCK'">
-            <v-icon>block</v-icon>
-          </v-btn>
+          <v-tooltip top>
+            <v-btn slot="activator" flat icon color="accent" @click="selectUser(props.item)">
+              <v-icon>edit</v-icon>
+            </v-btn>
+            <span>{{Messages.edit}}</span>
+          </v-tooltip>
+          <v-tooltip top>
+            <v-btn
+              slot="activator"
+              flat
+              icon
+              color="primary"
+              v-if="props.item.status != 'DISABLED'"
+            >
+              <v-icon>lock</v-icon>
+            </v-btn>
+            <span>{{Messages.disable}}</span>
+          </v-tooltip>
+          <v-tooltip top>
+            <v-btn slot="activator" flat icon color="info" v-if="props.item.status != 'ACTIVE'">
+              <v-icon>lock_open</v-icon>
+            </v-btn>
+            <span>{{Messages.activate}}</span>
+          </v-tooltip>
+          <v-tooltip top>
+            <v-btn slot="activator" flat icon color="warning" v-if="props.item.status != 'BLOCK'">
+              <v-icon>block</v-icon>
+            </v-btn>
+            <span>{{Messages.block}}</span>
+          </v-tooltip>
         </td>
       </template>
     </v-data-table>
@@ -121,7 +139,7 @@ import Ubication from "@/models/Ubication";
     UserForm: UserForm
   }
 })
-export default class Users extends BaseController {
+export default class UserList extends BaseController {
   search = "";
   Crud = Crud;
   loading = true;
@@ -172,7 +190,7 @@ export default class Users extends BaseController {
     },
     {
       text: Messages.status,
-      sortable: false,
+      sortable: true,
       value: "status"
     },
     {

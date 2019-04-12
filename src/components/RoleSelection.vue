@@ -20,7 +20,7 @@
 
         <v-list-tile-action>
           <v-btn icon ripple>
-            <v-icon color="accent">check_circle</v-icon>
+            <v-icon color="accent">crop_square</v-icon>
           </v-btn>
         </v-list-tile-action>
       </v-list-tile>

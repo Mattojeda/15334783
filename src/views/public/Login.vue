@@ -15,7 +15,7 @@
         ref="formRemember"
       >
         <v-card-text>
-          <v-text-field v-model="user.email" :rules="[rules.email]" :label="Messages.email"></v-text-field>
+          <v-text-field v-model="user.email" :rules="[rules.email, rules.required]" :label="Messages.email"></v-text-field>
           <v-text-field
             v-model="user.userName"
             :rules="[rules.required]"
@@ -114,7 +114,7 @@ export default class Login extends BaseController {
     form.validate();
     if (!this.formValid) {
       this.showMessage([
-        new Alert(this.Messages.errors.formHasErrors, "error")
+        new Alert(this.Messages.errors.loginError, "error")
       ]);
     } else {
       this.loading = true;
@@ -128,7 +128,7 @@ export default class Login extends BaseController {
           if (this.attempts >= 3) {
             this.remember = true;
           }
-          this.showMessage([new Alert(this.Messages.noUserFound, "error")]);
+          this.showMessage([new Alert(this.Messages.errors.loginError, "error")]);
         }
         this.loading = false;
       });

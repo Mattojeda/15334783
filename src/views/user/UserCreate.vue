@@ -20,7 +20,8 @@
             ></v-select>
             <v-text-field
               v-model="user.document"
-              :rules="[rules.required]"
+              :rules="[rules.number, rules.required]"
+              type="number"
               :label="Messages.document"
             ></v-text-field>
           </v-card-text>

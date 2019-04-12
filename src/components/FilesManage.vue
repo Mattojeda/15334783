@@ -4,7 +4,7 @@
       <v-card-title>
         <ListHeader>
           <span slot="tittle">{{Messages.filesManage}}</span>
-          <v-btn slot="button" color="primary" outline @click="addFile =true">
+          <v-btn v-if="!hideAddition" slot="button" color="primary" outline @click="addFile =true">
             {{Messages.add}}
             <v-icon right v-if="mode == Crud.READ">add</v-icon>
           </v-btn>
@@ -22,9 +22,12 @@
               </v-btn>
             </td>
             <td>
-              <v-btn flat icon color="primary" @click="deleteFile(props.item)">
-                <v-icon>delete</v-icon>
-              </v-btn>
+              <v-tooltip top>
+                <v-btn slot="activator" flat icon color="primary" @click="deleteFile(props.item)">
+                  <v-icon>delete</v-icon>
+                </v-btn>
+                <span>{{Messages.delete}}</span>
+              </v-tooltip>
             </td>
           </template>
         </v-data-table>
@@ -39,7 +42,7 @@
           </div>
         </v-card-title>
         <v-card-text>
-          <v-container>
+          <v-container  grid-list-md>
             <v-layout row wrap>
               <v-flex xs12>
                 <v-select
@@ -124,6 +127,7 @@ import Config from "@/constants/Config";
 })
 export default class FilesManage extends BaseController {
   @Prop() fileList!: AppFile[];
+  @Prop() hideAddition!: boolean;
   addFile = false;
   filetypes = Data.fileTypes;
   Crud = Crud;
@@ -223,9 +227,11 @@ export default class FilesManage extends BaseController {
       fr.readAsDataURL(files[0]);
       fr.addEventListener("load", () => {
         this.newFile.url = fr.result;
-      if (Config.imageValidFormats.indexOf(this.newFile.content!.type) != -1) {
-        this.newFile.image = true;
-      }
+        if (
+          Config.imageValidFormats.indexOf(this.newFile.content!.type) != -1
+        ) {
+          this.newFile.image = true;
+        }
         this.loading = false;
       });
     } else {

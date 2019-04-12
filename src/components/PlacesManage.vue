@@ -4,7 +4,7 @@
       <v-card-title>
         <ListHeader>
           <span slot="tittle">{{Messages.placeManage}}</span>
-          <v-btn slot="button" color="primary" outline @click="changeMode()">
+          <v-btn v-if="!hideAddition" slot="button" color="primary" outline @click="changeMode()">
             <v-icon left v-if="mode != Crud.READ">arrow_left</v-icon>
             {{mode == Crud.READ ? Messages.add : Messages.comeback}}
             <v-icon right v-if="mode == Crud.READ">add</v-icon>
@@ -26,9 +26,12 @@
             <td>{{ props.item.id}}</td>
             <td>{{ props.item.description}}</td>
             <td>
-              <v-btn flat icon color="primary" @click="deletePlace(props.item)">
-                <v-icon>delete</v-icon>
-              </v-btn>
+              <v-tooltip top>
+                <v-btn slot="activator" flat icon color="primary" @click="deletePlace(props.item)">
+                  <v-icon>delete</v-icon>
+                </v-btn>
+                <span>{{Messages.delete}}</span>
+              </v-tooltip>
             </td>
           </template>
         </v-data-table>
@@ -55,13 +58,15 @@
               v-if="searchType == 1"
               v-model="newPlace.register"
               :label="Messages.placeRegister"
-              :rules="[rules.required]"
+              :rules="[rules.number, rules.required]"
+              type="number"
             ></v-text-field>
             <v-text-field
               v-if="searchType == 2"
               v-model="newPlace.id"
               :label="Messages.placeDocument"
-              :rules="[rules.required]"
+              :rules="[rules.number, rules.required]"
+              type="number"
             ></v-text-field>
           </v-card-text>
           <v-card-actions>
@@ -109,6 +114,7 @@ import PlaceForm from "@/components/PlaceForm.vue";
 })
 export default class PlacesManage extends BaseController {
   @Prop() placeList!: Place[];
+  @Prop() hideAddition!: boolean;
   searchPlace = false;
   placeTypes = Data.placeTypes;
   Crud = Crud;

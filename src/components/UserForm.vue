@@ -26,7 +26,7 @@
         <v-card flat>
           <v-form v-model="userForm2" @submit.prevent="saveContactInformation" ref="form2">
             <v-card-text>
-              <v-container>
+              <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12 md6>
                     <v-autocomplete
@@ -62,7 +62,8 @@
                   <v-flex xs4 md1>
                     <v-text-field
                       v-model="user.ubications[0].address.part2"
-                      :rules="mode != Crud.READ ? [rules.required] : []"
+                      type="number"
+                      :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
                       :label="Messages.addressNo"
                     ></v-text-field>
                   </v-flex>
@@ -77,7 +78,8 @@
                   <v-flex xs6 md1>
                     <v-text-field
                       v-model="user.ubications[0].address.part4"
-                      :rules="mode != Crud.READ ? [rules.required] : []"
+                      type="number"
+                      :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
                       :label="Messages.addressNo"
                     ></v-text-field>
                   </v-flex>
@@ -92,7 +94,8 @@
                   <v-flex xs6 md1>
                     <v-text-field
                       v-model="user.ubications[0].address.part6"
-                      :rules="mode != Crud.READ ? [rules.required] : []"
+                      type="number"
+                      :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs6 md2>
@@ -106,7 +109,7 @@
                     <v-text-field
                       type="number"
                       v-model="user.phone"
-                      :rules="mode != Crud.READ ? [rules.required] : []"
+                      :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
                       :label="Messages.phone"
                     ></v-text-field>
                   </v-flex>
@@ -114,14 +117,14 @@
                     <v-text-field
                       type="number"
                       v-model="user.cellphone"
-                      :rules="mode != Crud.READ ? [rules.required] : []"
+                      :rules="mode != Crud.READ ? [rules.number, rules.required] : []"
                       :label="Messages.cellphone"
                     ></v-text-field>
                   </v-flex>
                   <v-flex xs12 md12>
                     <v-text-field
                       v-model="user.email"
-                      :rules="mode != Crud.READ ? [rules.email] : []"
+                      :rules="mode != Crud.READ ? [rules.email, rules.required] : []"
                       :label="Messages.email"
                     ></v-text-field>
                   </v-flex>
@@ -147,7 +150,7 @@
         <v-card flat>
           <v-form v-model="userForm3" @submit.prevent="saveUser" ref="userForm3">
             <v-card-text>
-              <v-container>
+              <v-container grid-list-md>
                 <v-layout wrap>
                   <v-flex xs12>
                     <v-text-field
@@ -282,17 +285,17 @@
               </v-flex>
             </v-layout>
           </v-card-text>
-        <v-card-actions>
-          <v-btn @click="roleModal = false" flat type="button">
-            <v-icon left>close</v-icon>
-            {{Messages.close}}
-          </v-btn>
-          <v-spacer/>
-          <v-btn color="primary" type="submit">
-            {{Messages.save}}
-            <v-icon right>save</v-icon>
-          </v-btn>
-        </v-card-actions>
+          <v-card-actions>
+            <v-btn @click="roleModal = false" flat type="button">
+              <v-icon left>close</v-icon>
+              {{Messages.close}}
+            </v-btn>
+            <v-spacer/>
+            <v-btn color="primary" type="submit">
+              {{Messages.save}}
+              <v-icon right>save</v-icon>
+            </v-btn>
+          </v-card-actions>
         </v-form>
       </v-card>
     </v-dialog>
